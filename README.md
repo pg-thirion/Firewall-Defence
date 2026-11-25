@@ -10,7 +10,7 @@ Requires a modern browser and Node.js 20+ for tests, or Python 3 for the local w
 python -m http.server 8000
 ```
 
-Open http://localhost:8000 in your browser. The game has no build step, runtime dependencies, API keys, backend, telemetry or real network attack functionality. It can also be deployed as a static site. The GitHub Pages workflow stages only the five runtime assets.
+Open http://localhost:8000 in your browser. The game has no build step, runtime dependencies, API keys, backend, telemetry or real network attack functionality. It can also be deployed as a static site. The Vercel build stages only the five runtime assets.
 
 ## Gameplay
 
@@ -43,9 +43,9 @@ The engine is deterministic and independent of the DOM. Regression tests cover m
 
 All attack traffic is simulated entirely within the browser. No external scanning, traffic generation, tracking or credentials are used.
 
-## GitHub Pages release
+## Vercel release
 
-The release workflow runs engine tests and Playwright browser tests before publishing. Enable GitHub Pages in **Settings → Pages → Build and deployment → Source → GitHub Actions**, then run **Test and publish Firewall Defence** from the Actions tab on main. Subsequent pushes to main publish automatically after successful tests. The expected site is https://pg-thirion.github.io/Firewall-Defence/.
+Vercel builds the main branch and runs the engine regression suite before staging runtime assets. GitHub Actions separately runs the cross-browser suite on main and pull requests.
 
 Run browser checks locally using Node.js 22 and Python 3:
 
@@ -55,4 +55,4 @@ npx playwright install chromium firefox webkit
 npx playwright test
 ```
 
-The browser suite covers deployment, upgrades, selling, invalid route tiles, mission settings, pause and speed controls, the field manual, reset confirmation, keyboard shortcuts, viewport overflow and corrupted local storage. The engine suite plays through all 15 waves in all nine map/difficulty combinations. The Pages host does not support arbitrary HTTP response headers, so a restrictive meta Content Security Policy and referrer policy are included. No outbound API requests or external scripts are needed.
+The browser suite covers deployment, upgrades, selling, invalid route tiles, mission settings, pause and speed controls, the field manual, reset confirmation, keyboard shortcuts, viewport overflow and corrupted local storage. The engine suite plays through all 15 waves in all nine map/difficulty combinations. Vercel serves restrictive security headers in addition to the HTML meta Content Security Policy and referrer policy. No outbound API requests or external scripts are needed.
