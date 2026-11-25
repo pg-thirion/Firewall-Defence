@@ -1,5 +1,6 @@
 # Firewall Defence
 
+**[Play Firewall Defence](https://firewall-defence.vercel.app/)**
 A browser-based cybersecurity tower defence game. Protect a simulated server by deploying and upgrading defensive controls against escalating attack waves.
 
 ## Play locally
