@@ -14,14 +14,14 @@ Open http://localhost:8000 in your browser. The game has no build step, runtime 
 
 ## Gameplay
 
-- Three network maps: Edge Gateway, Cloud Perimeter and Data Centre.
+- Five network maps: Edge Gateway, Cloud Perimeter, Data Centre, Campus Network and Industrial Control.
 - Three difficulty settings, a 15-wave campaign and endless mode.
-- Six defensive controls: firewall, IDS, rate limiter, IPS, WAF and traffic scrubber.
-- Six simulated threat types, including advanced threats every fifth wave.
+- Nine defensive controls: firewall, IDS, rate limiter, IPS, WAF, traffic scrubber, honeypot, endpoint guard and secure proxy.
+- Nine simulated threat types, including advanced threats every fifth wave.
 - Deploy, upgrade to level three, sell, prioritise targets and repair the server.
 - Inspect ranges, forecast incoming threats and review the live event log.
 - Pause, resume, and change simulation speed. Local personal best persists between completed missions.
-- Keyboard shortcuts: 1 through 6 select a defence, N starts a wave, Space pauses or resumes, and Escape clears selection when focus is not on an interactive control.
+- Keyboard shortcuts: 1 through 9 select a defence, N starts a wave, Space pauses or resumes, and Escape clears selection when focus is not on an interactive control.
 
 IDS does not block threats directly. It reveals stealth traffic and increases damage against marked threats. Rate limiting slows traffic. Combine defences for broader coverage. The mechanics are simplified fictional abstractions for education, not a faithful network simulator.
 
@@ -55,4 +55,14 @@ npx playwright install chromium firefox webkit
 npx playwright test
 ```
 
-The browser suite covers deployment, upgrades, selling, invalid route tiles, mission settings, pause and speed controls, the field manual, reset confirmation, keyboard shortcuts, viewport overflow and corrupted local storage. The engine suite plays through all 15 waves in all nine map/difficulty combinations. Vercel serves restrictive security headers in addition to the HTML meta Content Security Policy and referrer policy. No outbound API requests or external scripts are needed.
+The browser suite covers deployment, upgrades, selling, invalid route tiles, mission settings, pause and speed controls, the field manual, reset confirmation, keyboard shortcuts, viewport overflow and corrupted local storage. The engine suite plays through all 15 waves in all fifteen map/difficulty combinations. Vercel serves restrictive security headers in addition to the HTML meta Content Security Policy and referrer policy. No outbound API requests or external scripts are needed.
+
+## Operations expansion
+
+- Three permanent-within-mission research tracks, each with three levels: damage, range and kill credits.
+- Four emergency actions: scan, EMP, freeze and shield. These spend credits and have individual cooldowns.
+- Five targeting priorities, per-node damage and kill statistics, per-threat breakdown, wave history and persistent local achievements.
+- Automatic next-wave countdown (optional), wave progress, live shield capacity, range previews and all-range overlay, reduced visual effects, threat labels and clearable logs.
+- A detailed operation report, including expenditure, repairs, upgrades and incident response actions.
+
+All simulation changes remain offline and deterministic. Progression is stored only for completed personal best scores and earned achievements; active missions are not saved.
