@@ -11,3 +11,7 @@ test("rate limiting slows traffic",()=>{const s=E.create();s.wave=2;s.phase="wav
 test("campaign and endless",()=>{for(const endless of [false,true]){const s=E.create(0,"normal",endless);s.wave=15;s.phase="wave";E.step(s,.05);assert.equal(s.phase,endless?"build":"won")}});
 test("loss and terminal guards",()=>{const s=E.create();s.integrity=1;s.phase="wave";s.wave=1;s.enemies=[{id:1,type:"bot",hp:10,maxHp:10,progress:s.path.length-1,x:13,y:3,slow:0,mark:0}];E.step(s,.05);assert.equal(s.phase,"lost");assert(!E.place(s,"ids",1,1));assert(!E.start(s));assert(!E.repair(s))});
 test("difficulty and boss waves",()=>{assert.equal(E.create(0,"hard").cash,300);assert.equal(E.create(1,"easy").integrity,125);assert.equal(E.wavePlan(5).at(-1),"boss");assert(!E.wavePlan(4).includes("boss"));assert(E.wavePlan(4).includes("stealth"))});
+
+test("rejects invalid input and inherited object keys",()=>{assert.throws(()=>E.create(0,"constructor"));assert.throws(()=>E.create("0"));assert.throws(()=>E.create(0,"normal",1));const s=E.create();assert(!E.place(s,"constructor",0,0));assert(!E.place(s,"__proto__",0,0));assert(!E.place(s,"firewall",1.5,1));assert(!E.place(s,"firewall",NaN,1));});
+test("endless wave size remains bounded",()=>{assert(E.wavePlan(1000000).length<=121)});
+test("invalid time steps do not mutate the simulation",()=>{const s=E.create();E.start(s);const before=JSON.stringify(s);for(const dt of [0,-1,NaN,Infinity])E.step(s,dt);assert.equal(JSON.stringify(s),before)});
